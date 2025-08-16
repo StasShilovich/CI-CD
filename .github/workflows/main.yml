@@ -12,11 +12,6 @@ jobs:
   build_test_deploy:
     runs-on: [self-hosted] 
 
-    env:
-      REGISTRY: ghcr.io  # Or docker.io if using Docker Hub
-      IMAGE_UI: ${{ env.REGISTRY }}/yourusername/kanban-ui
-      IMAGE_BACKEND: ${{ env.REGISTRY }}/yourusername/kanban-app
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
