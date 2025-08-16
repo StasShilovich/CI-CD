@@ -27,7 +27,7 @@ jobs:
           # Ensure dependencies are downloaded and tests are run
           mvn clean test
 
-      # Run frontend tests
+      # Run frontend tests 
       - name: Run Frontend Tests
         run: |
           cd ./kanban-frontend-develop
