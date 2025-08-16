@@ -47,15 +47,6 @@ jobs:
         run: |
           docker build -t $IMAGE_BACKEND ./kanban-backend-develop
 
-      # Push images to registry (if needed)
-      - name: Push Kanban UI image
-        run: |
-          docker push $IMAGE_UI
-
-      - name: Push Kanban App image
-        run: |
-          docker push $IMAGE_BACKEND
-
       # Deployment step (assuming local deployment)
       - name: Deploy containers (if deploying locally)
         run: |
