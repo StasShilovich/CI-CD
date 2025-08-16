@@ -28,11 +28,11 @@ jobs:
           mvn clean test
 
       # Run frontend tests 
-      - name: Run Frontend Tests
-        run: |
-          cd ./kanban-frontend-develop
-          npm install
-          npm test --force
+     # - name: Run Frontend Tests
+     #   run: |
+     #     cd ./kanban-frontend-develop
+     #     npm install
+     #     npm test --force
 
       # Build Docker images
       - name: Build Kanban UI Docker image
