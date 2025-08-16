@@ -51,8 +51,4 @@ jobs:
       - name: Deploy containers (if deploying locally)
         run: |
           docker-compose down || true
-          
-          docker pull $IMAGE_UI || true
-          docker pull $IMAGE_BACKEND || true
-
           docker-compose up -d
