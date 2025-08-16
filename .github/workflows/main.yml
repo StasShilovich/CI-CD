@@ -50,5 +50,5 @@ jobs:
       # Deployment step (assuming local deployment)
       - name: Deploy containers (if deploying locally)
         run: |
-          docker-compose down || true
+          docker-compose down 
           docker-compose up -d
