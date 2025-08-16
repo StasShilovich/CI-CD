@@ -47,8 +47,9 @@ jobs:
         run: |
           docker build -t $IMAGE_BACKEND ./kanban-backend-develop
 
-      # Deployment step (assuming local deployment)
-      - name: Deploy containers (if deploying locally)
+      # Deployment step
+      - name: Deploy containers
         run: |
+          docker ps -a
           docker-compose down 
           docker-compose up -d
