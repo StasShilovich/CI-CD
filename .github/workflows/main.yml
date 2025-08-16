@@ -1,0 +1,68 @@
+name: Build, Test, Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_test_deploy:
+    runs-on: [self-hosted] 
+
+    env:
+      REGISTRY: ghcr.io  # Or docker.io if using Docker Hub
+      IMAGE_UI: ${{ env.REGISTRY }}/yourusername/kanban-ui
+      IMAGE_BACKEND: ${{ env.REGISTRY }}/yourusername/kanban-app
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Run backend tests via Maven
+      - name: Run Backend Tests with Maven
+        run: |
+          cd ./kanban-backend-develop
+          
+          # Ensure dependencies are downloaded and tests are run
+          mvn clean test
+
+      # Run frontend tests
+      - name: Run Frontend Tests
+        run: |
+          cd ./kanban-frontend-develop
+          npm install
+          npm test
+
+      # Build Docker images
+      - name: Build Kanban UI Docker image
+        run: |
+          docker build -t $IMAGE_UI ./kanban-frontend-develop
+
+      - name: Build Kanban App Docker image
+        run: |
+          docker build -t $IMAGE_BACKEND ./kanban-backend-develop
+
+      # Push images to registry (if needed)
+      - name: Push Kanban UI image
+        run: |
+          docker push $IMAGE_UI
+
+      - name: Push Kanban App image
+        run: |
+          docker push $IMAGE_BACKEND
+
+      # Deployment step (assuming local deployment)
+      - name: Deploy containers (if deploying locally)
+        run: |
+          docker-compose down || true
+          
+          docker pull $IMAGE_UI || true
+          docker pull $IMAGE_BACKEND || true
+
+          docker-compose up -d
