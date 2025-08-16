@@ -32,7 +32,7 @@ jobs:
         run: |
           cd ./kanban-frontend-develop
           npm install
-          npm test
+          npm test --force
 
       # Build Docker images
       - name: Build Kanban UI Docker image
