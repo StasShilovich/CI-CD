@@ -19,7 +19,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Run backend tests via Maven 
+      # Run backend tests via Maven
       - name: Run Backend Tests with Maven
         run: |
           cd ./kanban-backend-develop
